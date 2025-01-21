@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<controller name="user" use="Smarty">
+    <actions blocking="on">
+
+        <action name="login" passalong="user_name:required=true,user_password:format=password:required=true:value=password" event='userLogin' comment='Triggers the user login workflow (if any)'>
+            <description>Launches the process that a person goes through to login</description>
+            <model class="user" id="user">
+                <parameter name="user_name" source="post" default="" required='true' />
+                <parameter name="password"  source="post" value="user_password" format="password" required='true' />
+            </model>  
+            <switch id='user' method='login'>
+                <case value='TRUE'> 
+                    <model class="user" method="routeToHomePage"></model>
+                </case>
+                <default>
+                    <redirect href='/index.html?message=Incorrect User ID or Password' />   
+                </default>
+            </switch>
+        </action>
+
+        <!-- ############################################################### -->
+
+        <action name="authentication" output="JSON">
+            <description>For remote APIs, lets them attempt to authenticate</description>
+            <model class="user" id="admin">
+                <parameter name="user_name" source="post" default="" required='true' />
+                <parameter name="password"  source="post" value="user_password" format="password" required='true' />
+            </model>
+            <switch id='admin' method='login'>
+                <case value='TRUE'>
+                    <model response="true" class='user' method='outputSessionData'>
+
+                    </model>
+                </case>
+                <default>
+                    <output text='{ "error": "Authentication Failed", "RC": 12 }'  />
+                </default>
+            </switch>
+        </action>
+
+        <!-- ############################################################### -->   
+        
+        <action name="recover" map='option'>
+            <description>Form to start the recover password process</description>
+            <model class="model" id="smtp"/>
+            <switch id="smtp" method="isSMTPEnabled">
+                <case value="TRUE">
+                    <assign var="message" value="" />
+                </case>
+                <default>
+                    <assign var="message" value="SMTP Is Not Configured" /> 
+                </default>
+            </switch>
+            <if var='option' eq='form'>
+                <then>
+                    <view name="recover" />
+                </then>
+                <else>
+                    <if var='option' eq='email'>
+                        <then>
+                            
+                        </then>
+                        <else>
+                            
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </action>
+        
+        <!-- ############################################################### -->
+
+        <action name="logout" event="userLogout" comment="Triggers the user logout workflow (if any)">
+            <description>Destroys the session and logs you out...</description>
+            <model class="user" id="user" method="logout">
+                
+            </model>
+            <redirect href="/index.html?message=Logout Successful" />
+        </action>
+        
+        <!-- ############################################################### -->
+        
+        <action name="info" blocking="off" ouput="JSON">
+            <description>Returns basic user information</description>
+            <comment>This service is called from the socket server, if it is installed</comment>
+            <entity class="user/identification" response="true" json="true" method="load">
+                <parameter name="id" value="user_id" source="request" required="true" />
+            </entity>
+        </action>
+        
+    </actions>
+</controller>

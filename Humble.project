@@ -1,0 +1,18 @@
+{
+    "project_name": "Home Solar Monitoring",
+    "project_url": "http:\/\/hsm.com:9070",
+    "project_port": "9070",
+    "factory_name": "HSM",
+    "framework_url": "https:\/\/humbleprogramming.com",
+    "module": "Monitor",
+    "namespace": "monitor",
+    "package": "Main",
+    "landing_page": "\/monitor\/dashboard\/home",
+    "author": "rick@homesolarmonitoring.com",
+    "name": "Rick Myers",
+    "hub_port": "",
+    "fpm": "",
+    "destination_folder": "C:\\var\\www\\HSM",
+    "hub_host": "",
+    "serial_number": "JQQQ-SRYU-OAVO-SEZX"
+}

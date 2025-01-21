@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<config>
+    <monitor>
+        <version>0.0.1</version>
+        <title>Monitor<!-- This will appear in the administration screens for this module --></title>
+        <description>The Monitor module<!-- This will appear in the admin page --></description>
+        <author>
+            <name/>
+            <email>rick@homesolarmonitoring.com</email>
+        </author>
+        <module>
+            <name>Monitor</name>
+            <weight>50</weight>
+            <required>Y</required>
+            <workflow>Y</workflow>
+            <package>Main</package>
+            <use>Smarty</use>
+        </module>
+        <structure comment="This section describes the layout of your module, technically you can rearrange it anyway you want, but I would recommend just stick with the default structure below or you may encounter upgrading problems in the future">
+            <models>
+                <source>Monitor/Models</source>
+            </models>
+            <helpers>
+                <source>Monitor/Helpers</source>
+            </helpers>
+            <controllers>
+                <source>Monitor/Controllers</source>
+                <cache>Monitor/Controllers/Cache</cache>
+            </controllers>
+            <mobile>
+                <controllers>
+                    <source>Monitor/Mobile/Controllers</source>
+                    <cache>Monitor/Mobile/Controllers/Cache</cache>
+                </controllers>
+                <views>
+                    <source>Monitor/Mobile/Views</source>
+                    <cache>Monitor/Mobile/Views/Cache</cache>
+                </views>
+            </mobile>
+            <schema>
+                <install>Monitor/Schema/Install</install>
+                <update>Monitor/Schema/Update</update>
+                <layout>Monitor/Schema/DSL</layout>
+            </schema>
+            <resources>
+                <sql>Monitor/Resources/sql</sql>
+                <js>Monitor/Resources/js</js>
+                <templates>Monitor/Resources/templates</templates>
+            </resources>            
+            <configuration>
+                <source>Monitor/etc</source>
+            </configuration>
+            <views>
+                <source>Monitor/Views</source>
+                <cache>Monitor/Views/Cache</cache>
+            </views>
+            <images>
+                <source>Monitor/Images</source>
+                <cache>Monitor/Images/Cache</cache>
+            </images>
+            <entities>
+                <source>Monitor/Entities</source>
+            </entities>
+            <RPC>
+                <source>Monitor/RPC</source>
+            </RPC>
+            <frontend comment="will probably deprecate this...">
+                <source>Monitor/web/app</source>
+            </frontend>
+        </structure>
+        <extend comment="Means whether to look up the Module hierarchy if a specific class is not found (if not found in current module, perhaps the class is in a parent module)">
+            <helpers>1</helpers>
+            <models>1</models>
+            <entities>1</entities>
+        </extend>     
+        <orm>
+            <prefix>monitor_</prefix>
+            <mongodb>monitor</mongodb>
+            <!--
+                Register your tables to be managed under this namespace in the entities section below in the following format:
+
+                <table_name polyglot="Y' />
+
+                The 'polyglot' attribute is optional.  Only specify when you are actually enabling the polyglot behavior
+            -->
+            <entities>
+
+            <users/><user_identification polyglot="Y"/><roles/><user_roles/></entities>
+        </orm>
+        <events>
+
+        </events>
+        <web>
+            <!-- Edits are used for separating form validation from the form -->
+            <edits>
+                <login>Monitor/web/edits/login.json</login>
+            </edits>
+            <main>
+                <js>
+                    <source>Monitor/web/js/Monitor.js</source>
+                </js>
+                <css>
+                    <source>Monitor/web/css/Monitor.css</source>
+                    <source>Monitor/web/css/compiled.css</source>
+                </css>
+            </main>
+            <bootstrap>
+                <js>
+                    <source>Monitor/web/bootstrap-4.3.0/js/bootstrap.min.js</source>
+                </js>
+                <css>
+                    <source>Monitor/web/bootstrap-4.3.0/css/bootstrap.min.js</source>
+                </css>
+            </bootstrap>
+            <vue>
+                <js>
+                    <source>Monitor/web/js/Vue3.js</source>
+                </js>
+            </vue>
+            <jquery>
+                <js>
+                    <source weight="5">Monitor/web/js/jquery.3.7.1.min.js</source>
+                </js>
+            </jquery>  
+        </web>
+    </monitor>
+</config>

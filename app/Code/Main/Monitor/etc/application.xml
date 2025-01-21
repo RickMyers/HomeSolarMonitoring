@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<application>
+    <name>Home Solar Monitoring</name>
+    <serial_number comment="Do Not Change, Value Is Required In Several Parts Of The Framework">JQQQ-SRYU-OAVO-SEZX</serial_number>
+    <iv comment="Initial Vector, see our section on encryption to understand what this does">0</iv>
+    <comment>
+        The Serial Number is  unique to your application and  is used when  encrypting  secrets and caching data if you do not specify
+        an Initial Vector (iv).  Changing the Serial Number or IV will make your secrets useless and will fully invalidate your cache.
+        It is expected that the Serial Number or IV will be shared for all developers of the application.
+    </comment>
+    <version>
+        <framework>0.8.0.3.1</framework>
+        <app>0.0.0.1</app>
+    </version>    
+    <state>DEVELOPMENT</state>
+    <stages>
+        <DEVELOPMENT order="1"/>
+        <TEST order="2"/>
+        <PRODUCTION order="3"/>
+    </stages>    
+    <msa>
+        <router>0</router>              <!-- Switch to 1 to make this node the router for a MSA based application (NOT FULLY IMPLEMENTED!)-->
+        <strategy>
+            <forward>1</forward>
+            <redirect>0</redirect>
+        </strategy>      
+    </msa>
+    <default>
+        <inline_templater options="Rain,Latte">Rain</inline_templater>
+        <templater options="Smarty,Twig,Latte,Savant,TBS,Rain,Blade,PHPTal,PHP">Twig</templater>
+        <date_format>Y-m-d</date_format>
+        <time_format>H:i:s</time_format>
+        <timestamp_format>Y-m-d H:i:s</timestamp_format>        
+    </default>
+    <api>
+        <enabled>0</enabled>            <!-- Switch to 1 to enable access to the API but see https://humbleprogramming.com/pages/API.htmls for more information first -->
+    </api>
+    <exceptions options="JSON,HTML" comment="Choose whether you want a JSON formatted exception or one that is a templated HTML response">HTML</exceptions>
+    <documentation_comment>    
+        The next section outlines the choices for creating automated documentation.   Choose either PHPDoc2 or APIGen(PHP 8.2+).  Select the option for each from the options
+        listed on the tag.  PHPDoc2 is the default since it supports more versions of PHP, but if you are using PHP 8.2 and later, APIGen is an excellent option as well.
+    </documentation_comment>
+    <documentation comment="Documentation will not be generated in environments with a state of PRODUCTION">
+        <engine options="PHPDoc2.phar,APIGen.phar">PHPDoc2.phar</engine>
+        <command options="php PHPDoc2.phar,apigen.phar app/Code --output Docs">php PHPDoc2.phar</command>
+        <source options="https://humbleprogramming.com/dist/phpdoc.php ,https://humbleprogramming.com/dist/apigen.php">https://humbleprogramming.com/dist/phpdoc.php</source>
+    </documentation>
+    <flags>
+        <!-- You can insert custom flags here, and query them at runtime -->
+        <display_mysql_errors comment="Mysql error are always logged but do you want them displayed on the page as well?">0</display_mysql_errors>
+    </flags>    
+    <support>
+        <name>Rick Myers</name>
+        <email>rick@homesolarmonitoring.com</email>  
+    </support>    
+    <status>
+        <enabled>1</enabled>           <!-- Switch to 0 to take the application offline -->
+        <quiescing>0</quiescing>     <!-- switch to 1 to being the process of taking the system offline -->
+        <installer>0</installer>     <!-- switch to 0 after installation to prevent accidental execution of the install script -->
+        <caching>1</caching>           <!-- Indicates whether memcached is available to store or retrieve data -->
+        <cli>0</cli>
+        <SSO>
+            <enabled>0</enabled>           <!-- Switch to 0 to use local authentication -->
+            <IDP/>
+        </SSO>
+        <authorization>                         <!-- Enable or disable service level authorization checking -->
+            <enabled>0</enabled>
+        </authorization>
+    </status>
+</application>
