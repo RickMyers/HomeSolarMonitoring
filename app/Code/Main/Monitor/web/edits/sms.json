@@ -1,9 +1,9 @@
 {
     "form":
     {
-        "id":           "monitor-login-form",
+        "id":           "monitor-sms-form",
         "drawme":       false,
-        "action":       "/monitor/dashboard/login",
+        "action":       "/monitor/dashboard/sms",
         "method":       "post",
         "style":        "",
         "onenterkey":   "send"
@@ -12,33 +12,37 @@
     [
         {
             "active":               true,
-            "id":                   "user_name",
-            "longname":             "Your Login Name",
+            "id":                   "sms",
+            "longname":             "Phone or E-mail",
             "type":                 "text",
             "required":             true,
             "force":                true
         },
         {
             "active":               true,
-            "id":                   "user_password",
-            "longname":             "Your password",
-            "type":                 "password",
+            "id":                   "sms_token",
+            "longname":             "Token",
+            "type":                 "text",
+            "mask":                 "######",
+            "maxlength":            6,
+            "minlength":            6,
             "required":             true,
             "force":                true
         },
         {
             "active":               true,
-            "id":                   "login-submit",
+            "id":                   "sms_submit",
             "longname":             "Submit Button",
             "type":                 "button",
             "onclick":      function () {
-                if (Edits['login'].validate()) {
-                    $E("monitor-login-form").submit();
+                if (Edits['sms'].validate()) {
+                    $E("monitor-sms-form").submit();
                 }
             }
         }
     ]
 }
+
 
 
 

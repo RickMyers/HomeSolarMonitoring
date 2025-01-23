@@ -94,6 +94,7 @@
             <!-- Edits are used for separating form validation from the form -->
             <edits>
                 <login>Monitor/web/edits/login.json</login>
+                <sms>Monitor/web/edits/sms.json</sms>
             </edits>
             <main>
                 <js>
@@ -102,8 +103,13 @@
                 <css>
                     <source>Monitor/web/css/Monitor.css</source>
                     <source>Monitor/web/css/compiled.css</source>
-                </css>
+                </css>  
             </main>
+            <monitor>
+                <css>
+                    <source>Monitor/web/css/compiled.css</source>
+                </css>
+            </monitor>               
             <bootstrap>
                 <js>
                     <source>Monitor/web/bootstrap-4.3.0/js/bootstrap.min.js</source>

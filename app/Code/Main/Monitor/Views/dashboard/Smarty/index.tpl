@@ -1,8 +1,9 @@
 <html>
     <head>
         <title> Portal | Home Solar Monitoring </title>        
-        <style type="text/css">
-            body {
+        <link rel="stylesheet" type="text/css" href="/css/monitor" />
+        <!--style type="text/css">
+           body {
                 overflow: hidden;
             }
             #outside {
@@ -128,119 +129,69 @@
               text-align: center;
               font-size: 12px;
             }
-            
-        </style>
+                        
+        </style-->
         <script type='text/javascript' src='/js/jquery'></script>
         <script type='text/javascript' src='/js/common'></script>
-        <script type='text/javascript'>
-            const scroller = (() => {
-                let current = 0;
-                let timer = false;
-                let graphs = [
-                    '/images/monitor/scroller/cost_1.png',
-                    '/images/monitor/scroller/cost_2.png',
-                    '/images/monitor/scroller/cost_3.png',
-                    '/images/monitor/scroller/cost_4.png',
-                    '/images/monitor/scroller/cost_5.jpg',
-                    '/images/monitor/scroller/cost_6.jpg'
-
-                ]                
-                return   {
-                    init: () => {
-                        $('#banner_image_current').attr('src',graphs[current]);
-                        $('#banner_image_next').attr('src',graphs[++current]);
-                        timer = window.setTimeout(scroller.next,8000);
-                    },
-                    next: () => {
-                        $('#banner_image_current').fadeOut();                        
-                        $('#banner_image_next').fadeIn(() => {
-                            $('#banner_image_current').attr('src',graphs[current]);
-                            current++;
-                            if (current > graphs.length) {
-                                current = 0;
-                            }
-                            $('#banner_image_current').css('display','block');
-                            $('#banner_image_next').css('display','none').attr('src',graphs[current]);
-                        });
-                        
-
-                        timer = window.setTimeout(scroller.next,8000);
-                    }
-
-                }
-            })();
-            window.onload = () => {
+        <script>
+            $(document).ready(() => {
                 new EasyEdits('/edits/monitor/login','login');
+                new EasyEdits('/edits/monitor/sms','sms');
                 let loginMessage = window.location.href.split('?');
                 if (loginMessage[1]) {
                     $('#error-lightbox').css('display','block');
                     let message = decodeURI(loginMessage[1]).split('=');
-                    $('#login-error').html(message[1].toString().replace('<', "&lt;").replace('>', "&gt;").replace("'", "&#39;").replace('"', "&#34;"));                     
-                }
-                scroller.init();
-            }
+                    $('#message_area').html(message[1].toString().replace('<', "&lt;").replace('>', "&gt;").replace("'", "&#39;").replace('"', "&#34;"));                     
+                }                
+                let tabs = new EasyTab('tab_navigation',150);
+                tabs.add('Standard Login',null,'standard_login_tab');
+                tabs.add('SMS Login',null,'alt_login_tab');
+                tabs.tabClick(0);
+            });
+        </script>
             
-        </script>        
     </head>
-    <body>
-        <div class='lightbox' id='error-lightbox' style='display: none'>
-            <table style='width: 100%; height: 100%'>
-                <tr>
-                    <td>
-                        <div style='margin-left: auto; margin-right: auto; width: 400px; padding: 20px; border-radius: 20px; background-color: ghostwhite; border: 1px solid transparent;'>
-                            <div id='login-error' style=' color: red; font-family: sans-serif; font-size: 1.4em'>
-                                
-                            </div><br /><br />
-                            <div style=''>
-                                <button onclick="$('#error-lightbox').css('display','none')"> Close </button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        
-        <div id="outside" style="padding: 0px; margin: 0px;">
-            <div style="float: right; margin-top: -9px; font-family: sans-serif; margin-right: 10px; font-size: 1em; color: #dd0000; font-weight: bolder">
+    <body class="m-0 p-0 bg-[url(/images/paradigm/bg_graph.png)]">
+        <div class="flex justify-center h-full w-full items-center font-bold flex-wrap place-content-center">
+            <div id="message_area" class="text-red-600 text-xl w-full text-center align-center">&nbsp;</div>
+            <div class="flex w-[500px] xm:w-full flex-row justify-center relative box-border">
                 
-            </div>
-        </div>
-        <div id="side-banner-1">
-
-        </div>
-        <div id="side-banner-2">
-            
-        </div>
-        <div id="container" style="white-space: nowrap;">
-            <div class="login-container">
-                <div id='card' class="login-card" style="display: inline-block">
-                    <center>
-                        <div style='font-family: sans-serif;'>
-                            <div>
-                                <div><img style="height: 62px; position: relative; " src="/images/monitor/logo.png" /><br />
-                                    <div style="display: none; padding: 5px">Home Solar Monitoring</div>
-                                </div>
-                            </div>
+                <div class="w-[25px] h-[400px] bg-gray-100 border-l-2 border-t-2 border-b-2 inline-block border-gray-300"></div>
+                <div class="h-[400px] bg-white border-t-2 border-b-2 pt-4 border-gray-300 inline-block flex-grow box-border">
+                    <div id="greeting" class="text-sm pl-2 pr-2 font-sans text-justify">
+                        <center><b>Welcome to Home Solar Monitoring!</b></center><br />
+                        
+                            Choose your login method below, using your User ID and Password or enter your phone number 
+                            or email to be sent a 6 digit number that you can use to login
+                        
+                    </div><br />
+                    <div id="tab_navigation">
+                        
+                    </div>
+                    <div id="standard_login_tab" class="w-full flex justify-center items-center text-xl font-sans text-center">
+                        <div class="inline-block m-auto pt-8">
+                            <form name='monitor-login-form' id='monitor-login-form' onsubmit='return false'  action='/monitor/dashboard/login' method='POST'>
+                               <input type="text"     name="user_name"     id='user_name'     class="p-2 rounded-sm mb-2 w-[325px] border-transparent" placeholder="Username" /><br />
+                               <input type="password" name="user_password" id='user_password' class="p-2 rounded-sm mb-2 w-[325px] border-transparent" placeholder="Password" autocomplete="off" /><br />
+                               <input type="submit"   name="login-submit"  id='login-submit'  class="p-1 text-white bg-blue-600 w-[325px] cursor-pointer" value="Login" />
+                             </form>     
                         </div>
-                        <div style='clear: both; margin-bottom: 20px'></div>
-                    </center>
-                    <form name='monitor-login-form' id='monitor-login-form' onsubmit='return false'  action='/monitor/home/login' method='POST'>
-                      <input type="text"     name="user_name" id='user_name' placeholder="Username"><br />
-                      <input type="password" name="user_password" id='user_password' placeholder="Password" autocomplete="off"><br />
-                      <input type="submit"   name="login-submit" id='login-submit' class="login login-submit" value="login">
-                    </form>
-
-                    <div class="login-help">
-                        <a style="color: #990000" href="/monitor/user/recover/form">Forgot Password</a> &nbsp; | &nbsp; <a title="Alternate login page for IPA use" style='color: blue' href="/monitor/user/register/form">Register</a>
+                    </div>
+                    <div id="alt_login_tab" class="w-full flex justify-center items-center text-xl font-sans text-center">
+                        <div class="inline-block m-auto pt-8">
+                            <form name='monitor-sms-form' id='monitor-sms-form' onsubmit='return false'  action='/monitor/dashboard/sms' method='POST'>
+                               <input type="text"     name="sms"       id='sms'       class="p-2 rounded-sm mb-2 w-[325px] border-transparent" placeholder="Phone or Email" /><br />
+                               <input type="text"     name="sms_token" id='sms_token' class="p-2 rounded-sm mb-2 w-[325px] border-transparent" placeholder="######" autocomplete="off" /><br />
+                               <input type="submit"   name="sms_submit"  id='sms_submit'  class="p-1 text-white bg-blue-600 w-[325px] cursor-pointer" value="Get Token" />
+                             </form>     
+                        </div>                        
+                    </div>
+                    <div class="absolute bottom-1 h-[25px] w-full text-center">
+                        <a href="/monitor/dashboard/register" class="text-sm font-mono text-blue-900 hover:underline"> Register </a> &bull; <a href="/monitor/dashboard/recover" class="text-sm font-mono text-blue-900 hover:underline" onclick="return false">Forgot Password</a>
                     </div>
                 </div>
-                <div style="position: relative; width: 600px; height: 343px; vertical-align: top; display: inline-block; background-image: url(/images/monitor/login_background.png); background-size: cover; background-repeat: no-repeat">
-                    <img src="" id="banner_image_next" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%" />
-                    
-                    <img src="" id="banner_image_current" style="display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%" />
-                </div>
+                <div class="w-[25px] h-[400px] bg-gray-100 border-r-2 border-t-2 border-b-2 inline-block border-gray-300"></div>
             </div>
         </div>
-        
     </body>
 </html>
