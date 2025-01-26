@@ -1,0 +1,97 @@
+
+{
+    "form":
+    {
+        "id":           "hsm_registration_form",
+        "drawme":       false,
+        "action":       "/monitor/user/register",
+        "method":       "post",
+        "style":        "",
+        "onenterkey":   "send"
+    },
+    "fields":
+    [
+        {
+            "active":               true,
+            "id":                   "first_name",
+            "longname":             "Your First Name",
+            "type":                 "text",
+            "required":             true,
+            "force":                true
+        },
+        {
+            "active":               true,
+            "id":                   "last_name",
+            "longname":             "Your Last Name",
+            "type":                 "text",
+            "required":             true,
+            "force":                true
+        },
+        {
+            "active":               true,
+            "id":                   "date_of_birth",
+            "longname":             "Your Date Of Birth",
+            "type":                 "text",
+            "mask":                 "#^/#^/####",
+            "required":             false,
+            "force":                false
+        },
+        {
+            "active":               true,
+            "id":                   "email",
+            "longname":             "An Email Address",
+            "type":                 "text",
+            "required":             true,
+            "force":                true
+        },
+        {
+            "active":               true,
+            "id":                   "confirm_password",
+            "longname":             "Your Login Name",
+            "type":                 "text",
+            "required":             true,
+            "force":                true
+        },        
+        {
+            "active":               true,
+            "id":                   "user_password",
+            "longname":             "Your password",
+            "type":                 "password",
+            "confirm":              "confirm_password",
+            "required":             true,
+            "force":                true
+        },
+        {
+            "active":               true,
+            "id":                   "gender",
+            "longname":             "Gender",
+            "type":                 "select",
+            "required":             false,
+            "force":                false
+        },   
+        {
+            "active":               true,
+            "id":                   "phone_number",
+            "longname":             "Phone Number",
+            "type":                 "text",
+            "mask":                 "(###)-###-####",
+            "required":             false,
+            "force":                false
+        },         
+        {
+            "active":               true,
+            "id":                   "register-submit",
+            "longname":             "Submit Button",
+            "type":                 "button",
+            "onclick":      function () {
+                if (Edits['register'].validate()) {
+                    $E("hsm_registration_form").submit();
+                }
+            }
+        }
+    ]
+}
+
+
+
+

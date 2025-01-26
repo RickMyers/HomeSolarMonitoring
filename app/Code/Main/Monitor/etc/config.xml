@@ -95,6 +95,7 @@
             <edits>
                 <login>Monitor/web/edits/login.json</login>
                 <sms>Monitor/web/edits/sms.json</sms>
+                <register>Monitor/web/edits/register.json</register>
             </edits>
             <main>
                 <js>

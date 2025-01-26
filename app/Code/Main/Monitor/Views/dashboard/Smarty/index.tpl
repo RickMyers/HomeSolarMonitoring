@@ -154,7 +154,7 @@
     <body class="m-0 p-0 bg-[url(/images/paradigm/bg_graph.png)]">
         <div class="flex justify-center h-full w-full items-center font-bold flex-wrap place-content-center">
             <div id="message_area" class="text-red-600 text-xl w-full text-center align-center">&nbsp;</div>
-            <div class="flex w-[500px] xm:w-full flex-row justify-center relative box-border">
+            <div class="flex w-[500px] sm:w-full flex-row justify-center relative box-border">
                 
                 <div class="w-[25px] h-[400px] bg-gray-100 border-l-2 border-t-2 border-b-2 inline-block border-gray-300"></div>
                 <div class="h-[400px] bg-white border-t-2 border-b-2 pt-4 border-gray-300 inline-block flex-grow box-border">

@@ -1,172 +1,107 @@
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Monitor | Password Recovery</title>
-    <link rel='stylesheet' type='text/css' href='/css/admintheme' />
-    <style type='text/css'>
-
-        .register-card {
-          /*padding: 40px;*/
-          width: 400px;
-          background-color: #F7F7F7;
-          border-radius: 2px 0px 0px 2px;
-          box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-          overflow: hidden;
-        }
-
-        .register-card h1 {
-          font-weight: 100;
-          text-align: center;
-          font-size: 2.3em;
-        }
-
-        .register-card input[type=submit] {
-          width: 100%;
-          display: block;
-          margin-bottom: 10px;
-          position: relative;
-        }
-
-        .register-card input[type=text], input[type=password] {
-          height: 44px;
-          font-size: 16px;
-          width: 100%;
-          margin-bottom: 10px;
-          -webkit-appearance: none;
-          background: #fff;
-          border: 1px solid #d9d9d9;
-          border-top: 1px solid #c0c0c0;
-          padding: 0 8px;
-          box-sizing: border-box;
-          -moz-box-sizing: border-box;
-        }
-
-        .register-card input[type=text]:hover, input[type=password]:hover {
-          border: 1px solid #b9b9b9;
-          border-top: 1px solid #a0a0a0;
-          -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-          -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-          box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .register {
-          text-align: center;
-          font-size: 14px;
-          font-family: 'Arial', sans-serif;
-          font-weight: 700;
-          height: 36px;
-          padding: 0 8px;
-        }
-
-        .register-submit {
-          border: 0px;
-          color: #fff;
-          text-shadow: 0 1px rgba(0,0,0,0.1);
-          background-color: #425445; /*#4d90fe;*/
-        }
-
-        .register-submit:hover {
-          border: 0px;
-          text-shadow: 0 1px rgba(0,0,0,0.3);
-          background-color:  #425445; /*#357ae8;*/
-        }
-
-        .register-card a {
-          text-decoration: none;
-          color: #666;
-          font-weight: 400;
-          text-align: center;
-          display: inline-block;
-          opacity: 0.6;
-          transition: opacity ease 0.5s;
-        }
-
-        .register-card a:hover {
-          opacity: 1;
-        }
-
-        .register-help {
-          width: 100%;
-          text-align: center;
-          font-size: 12px;
-        }
-        body {
-            background-image: url("/web/images/bg_graph.png")
-        }           
-    </style>
-    <script type='text/javascript' src='/js/humble-jquery'></script>
-    <script type='text/javascript' src='/js/common'></script>
-    <script type='text/javascript'>
-        window.onload = function () {
-            new EasyEdits('/web/edits/register.json','register');
-            var registerMessage = window.location.href.split('?message=');
-            if (registerMessage[1]) {
-                $E('register-error').innerHTML = unescape(registerMessage[1]);
-            }
-        }
-    </script>
-
-</head>
-
-<body>
-    <table style='width: 100%; height: 100%'>
-        <tr>
-            <td align='center' valign='middle'>
-                <table cellspacing='0' cellpadding='0'>
-                    <tr>
-                        <td>
-                            <div id='register-error' style='text-align: center; padding: 5px;  font-family: sans-serif; font-size: 1.1em; color: #c00; font-weight: bolder; height: 20px'>
-                                {$message}
+    <head>
+        <title> Portal | Home Solar Monitoring </title>        
+        <link rel="stylesheet" type="text/css" href="/css/monitor" />
+        <script type='text/javascript' src='/js/jquery'></script>
+        <script type='text/javascript' src='/js/common'></script>
+        <script>
+            $(document).ready(() => {
+                new EasyEdits('/edits/monitor/register','register');
+            });
+        </script>
+            
+    </head>
+    <body class="m-0 p-0 bg-[url(/images/paradigm/bg_graph.png)]">
+        <div class="flex justify-center h-full w-full items-center flex-wrap place-content-center">
+            <div id="message_area" class="text-red-600 text-xl w-full text-center align-center">&nbsp;</div>
+            <div class="flex w-[600px] flex-row justify-center relative box-border">
+                <div class="w-[25px] h-[600px] bg-gray-100 border-l-2 border-t-2 border-b-1 inline-block border-gray-300"></div>
+                <div class="h-[600px] bg-white border-t-2 border-b-1 pt-4 border-gray-300 inline-block flex-grow box-border">
+                    
+                    <form name="hsm_registration_form" id="hsm_registration_form" onsubmit="return false">
+                        Instructions<br ><br />
+                            Please fill out the information below, none of it will be used for any other purpose than logging in to your Home Solar Monitoring Dashboard.
+                            If you include a phone number or email, you can use those as an alternate means of logging in<br /><br /><hr />
+                            <div class="w-full m-0 p-0 border-box mb-1">
+                                <div class="w-1/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        First Name
+                                    </div>
+                                    <div class="w-full font-sans pl-4 border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input type="text" class="w-full pl-1" name="first_name" id="first_name" />
+                                    </div>
+                                </div><div class="w-1/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        Last Name
+                                    </div>
+                                    <div class="w-full font-sans pl-4 border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input type="text" class="w-full pl-1" name="last_name" id="last_name" />
+                                    </div>
+                                </div><div class="w-1/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        Date Of Birth
+                                    </div>
+                                    <div class="w-full font-sans pl-4 border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input type="text" class="w-full text-center" name="date_of_birth" id="date_of_birth" placeholder="##/##/####" />
+                                    </div>
+                                </div>                                
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id='card' class="register-card">
-                                <div style="border-left: 4px solid #425445; border-right: 4px solid #425445; border-top: 4px solid #425445; height: 44px"></div>
-                                <div style="padding: 10px 40px 10px 40px">
-                                    <center>
-                                        Welcome To Monitor <br /><br />
-                                        <img src='/images/humble/register_user.png'  height='100' /><br /><br />
-                                        Please enter the following minimum information to create an account<br /><br />
-                                    </center>
-                                    <form name='register-form' id='register-form' onsubmit='return false'  action='/acme/landing/register/action' method='POST'>
-                                        <table style="width: 100%; border: 0px; padding: 0px">
-                                            <tr>
-                                                <td style="padding: 0px 0px 10px 0px">
-                                                    <input type="text" name="first_name" id="first_name" value="" placeholder="First Name"/>
-                                                </td>
-                                                <td style="padding: 0px 0px 10px 0px">
-                                                    <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 0px 0px 10px 0px" colspan="2">
-                                                    <input type="text" name="email" id="email" value="" placeholder="E-Mail Address"/>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 0px 0px 10px 0px" colspan="2">
-                                                    <input type="submit" name="register-submit" id='register-submit' class="register register-submit" value="register" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                    <div class="register-help">
-                                        <a href="/index.html">Login</a> • <a href="/monitor/dashboard/recover/form">Forgot Password</a> 
+                            <div class="w-full mb-1">
+                                <div class="w-2/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        E-Mail
+                                    </div>
+                                    <div class="w-full font-sans pl-4 border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input type="text" class="w-full pl-1" name="email" id="email" />
+                                    </div>
+                                </div><div class="w-1/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        Gender
+                                    </div>
+                                    <div class="w-full font-sans border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <select class="w-full" name="gender" id="gender">
+                                            <option value=""> </option>
+                                            <option value="M"> Male </option>
+                                            <option value="F"> Female </option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div style="border-left: 4px solid #425445; border-right: 4px solid #425445; border-bottom: 4px solid #425445; height: 44px"></div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-
+                            <div class="w-full">
+                                <div class="w-1/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        Password
+                                    </div>
+                                    <div class="w-full pl-4 font-sans border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input class="pl-1 w-full" type="password" name="user_password" id="user_password" />
+                                    </div>
+                                </div><div class="w-1/3 inline-block">
+                                    <div class="w-full font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        Confirm Password
+                                    </div>
+                                    <div class="pl-4 font-sans border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input class="pl-1 w-full" type="password" name="confirm_password" id="confirm_password" />
+                                    </div>
+                                </div><div class="w-1/3 inline-block">
+                                    <div class="font-mono text-sm pt-2 pb-1 bg-gray-100 border-b-1 border-gray-300 border-r-2">
+                                        Phone Number
+                                    </div>
+                                    <div class="pl-4 font-sans border-b-1 border-gray-300 bg-gray-100 border-r-2"> 
+                                        <input type="text" class="w-full text-center" name="phone_number" id="phone_number" placeholder="(###)-###-####" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr />
+                            <div class="p-2 text-center"> 
+                                <br /><br />
+                                <input type="button" id="register-submit" class="cursor-pointer bg-blue-600 text-white text-xl px-4 py-2 rounded-lg" value="Register" />
+                            </div>
+                            
+                    </form>
+                </div>
+                <div class="w-[25px] h-[600px] bg-gray-100 border-r-2 border-t-2 border-b-1 inline-block border-gray-300"></div>
+            </div>
+        </div>
+    </body>
 </html>
-
-
-
