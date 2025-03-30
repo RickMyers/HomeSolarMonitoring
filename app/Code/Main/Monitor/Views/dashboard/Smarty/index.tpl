@@ -73,7 +73,6 @@
                 }
             })();            
             $(document).ready(() => {
-                
                 new EasyEdits('/edits/monitor/login','login');
                 new EasyEdits('/edits/monitor/sms','sms');
                 let loginMessage = window.location.href.split('?');
@@ -94,7 +93,7 @@
     <body class="m-0 p-0]">
         <div id="outside" style="padding: 0px; margin: 0px;"  class="bg-midnight">
             <div style="float: right; margin-top: -9px; font-family: sans-serif; margin-right: 10px; font-size: 1em; color: #dd0000; font-weight: bolder">
-                Hello
+                
             </div>
         </div>
         <div id="side-banner-1">
@@ -138,7 +137,7 @@
                             <a href="/monitor/dashboard/register" class="text-sm font-mono text-blue-900 hover:underline"> Register </a> &bull; <a href="/monitor/dashboard/recover" class="text-sm font-mono text-blue-900 hover:underline" onclick="return false">Forgot Password</a>
                         </div>   
                     </div>
-                    <div class="relative sm:hidden lg:inline-block w-[600px] align-top bg-[url(/images/monitor/login_background.png)] bg-no-repeat bg-gray-300 border-t-2 border-b-2 border-box">
+                    <div class="relative align-top bg-[url(/images/monitor/login_background.png)] bg-no-repeat bg-gray-300 border-t-2 border-b-2 border-box">
                         <img src="" id="banner_image_next" style="display: none; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%" />
 
                         <img src="" id="banner_image_current" style="display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%" />
