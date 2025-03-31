@@ -100,7 +100,10 @@
 
         </div>
         <div id="side-banner-2" class="bg-[url(/images/paradigm/bg_graph.png)] border-l-2 border-gray-400 border-t-2">
-        <div class="flex justify-center h-full w-full items-center font-bold flex-wrap place-content-center">
+        
+        </div>
+
+        <div style="position: absolute; top: 0px; left: 0px" class="flex justify-center h-full w-full items-center font-bold flex-wrap place-content-center">
             <div id="message_area" class="text-red-600 text-xl w-full text-center align-center">&nbsp;</div>
             <div class="flex lg:w-[1100px]   flex-row justify-center relative box-border">
                 <div class="w-[25px] h-[400px] bg-gray-100 border-l-2 border-t-2 border-b-2 inline-block border-gray-300"></div>
@@ -142,10 +145,9 @@
 
                         <img src="" id="banner_image_current" style="display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%" />
                     </div>                
-                    <div class="w-[25px] h-[400px] bg-gray-100 border-r-2 border-t-2 border-b-2 inline-block border-gray-300"></div>
-                </div>
-            </div>            
-        </div>        
+                <div class="w-[25px] h-[400px] bg-gray-100 border-r-2 border-t-2 border-b-2 inline-block border-gray-300"></div>
+            </div>
+        </div>                    
 
     </body>
 </html>

@@ -15,18 +15,17 @@ LICENSE
 index.html
 index.php
 app/install/.htaccess
-api.php
-iapi.php
-mapi.php
-msr.php
+app/api.php
+app/iapi.php
+app/mapi.php
+app/msr.php
 mobile.php
 debug.php
 install.php
-loader.php
+app/loader.php
+app/aliases.php
 app/composer.json
 app/filelaunch.php
-app/humble
-app/humble.bat
 app/autoload.php
 app/launch.php
 app/AuthorizationEngine.php
@@ -43,12 +42,16 @@ app/HumbleException.php
 app/Log.php
 app/Singleton.php
 app/Trigger.php
+app/RunWrapper.php
+app/humble
+app/humble.bat
 app/Validator.php
 web/*
 app/cli/*
 app/PIDS/*
 app/Code/Framework/*
 app/Exceptions/*
+app/install/config.xml
 app/install/.htaccess .htaccess
 web/css/login.css
 web/css/index.css
@@ -1209,6 +1212,7 @@ app/Code/Framework/Humble/lib/sample/install/Settings.php
 app/Code/Framework/Humble/lib/sample/install/etc/public_routes.json
 app/Code/Framework/Humble/lib/sample/install/etc/application.xml
 app/Code/Framework/Humble/lib/sample/install/etc/api_policy.json
+app/Code/Framework/Humble/lib/sample/install/etc/route_aliases.json
 app/Code/Framework/Humble/lib/sample/install/etc/cadence.json
 app/Code/Framework/Humble/lib/sample/component/Model.php.txt
 app/Code/Framework/Humble/lib/sample/component/controller.xml
@@ -1628,6 +1632,11 @@ app/Code/Framework/Humble/Views/home/Smarty/page.tpl
 app/Code/Framework/Humble/Views/home/Smarty/404.tpl
 app/Code/Framework/Humble/Views/home/Smarty/index.tpl
 app/Code/Framework/Humble/Views/labs/Twig/apps.twig
+app/Code/Framework/Humble/Views/labs/Twig/transformers.twig
+app/Code/Framework/Humble/Views/labs/Twig/installation.twig
+app/Code/Framework/Humble/Views/labs/Twig/galaga.twig
+app/Code/Framework/Humble/Views/labs/Twig/asteroids.twig
+app/Code/Framework/Humble/Views/labs/Twig/overview.twig
 app/Code/Framework/Humble/Views/events/Smarty/open.tpl
 app/Code/Framework/Humble/Views/Exceptions/workflow.rain
 app/Code/Framework/Humble/Views/Exceptions/csrf.rain
@@ -1788,6 +1797,7 @@ app/Code/Framework/Humble/etc/application.xml
 app/Code/Framework/Humble/etc/config.xml
 app/Code/Framework/Humble/etc/api_policy.json
 app/Code/Framework/Humble/etc/template.tpl
+app/Code/Framework/Humble/etc/route_aliases.json
 app/Code/Framework/Humble/etc/cadence.json
 app/Code/Framework/Paradigm/Entities/Events.php
 app/Code/Framework/Paradigm/Entities/Designer/Forms.php
@@ -2054,7 +2064,10 @@ app/Code/Framework/Workflow/Schema/Update/carriers.sql
 app/Code/Framework/Workflow/web/css/Config.css
 app/Code/Framework/Workflow/web/css/compiled.css
 app/Code/Framework/Workflow/web/css/input.css
+app/Code/Framework/Workflow/web/tailwind/package.json
+app/Code/Framework/Workflow/web/tailwind/tailwind.config.js
 app/Code/Framework/Workflow/web/edits/process.json
+app/Code/Framework/Workflow/web/edits/io.json
 app/Code/Framework/Workflow/web/edits/notification.json
 app/Code/Framework/Workflow/web/edits/actor.json
 app/Code/Framework/Workflow/web/edits/sample.json
@@ -2077,6 +2090,7 @@ app/Code/Framework/Workflow/Views/elements/Smarty/trigger.tpl
 app/Code/Framework/Workflow/Views/elements/Smarty/listener.tpl
 app/Code/Framework/Workflow/Views/elements/Smarty/actor.tpl
 app/Code/Framework/Workflow/Views/elements/Smarty/decision.tpl
+app/Code/Framework/Workflow/Views/elements/Smarty/input.tpl
 app/Code/Framework/Workflow/Views/elements/Smarty/system.tpl
 app/Code/Framework/Workflow/Views/elements/Smarty/sensor.tpl
 app/Code/Framework/Workflow/Views/elements/Smarty/process.tpl
@@ -2185,6 +2199,7 @@ app/Code/Framework/Workflow/Helpers/HumbleString.php
 app/Code/Framework/Workflow/Helpers/Helper.php
 app/Code/Framework/Workflow/Helpers/Utility.php
 app/Code/Framework/Workflow/Models/Trigger.php
+app/Code/Framework/Workflow/Models/Io.php
 app/Code/Framework/Workflow/Models/Output.php
 app/Code/Framework/Workflow/Models/User.php
 app/Code/Framework/Workflow/Models/Model.php
@@ -2288,6 +2303,7 @@ app/Code/Framework/Admin/Views/user/Twig/home.twig
 app/Code/Framework/Admin/Views/user/Twig/list.twig
 app/Code/Framework/Admin/Views/user/Twig/enrollform.twig
 app/Code/Framework/Admin/Views/explorer/Twig/app.twig
+app/Code/Framework/Admin/Views/explorer/Twig/edit.twig
 app/Code/Framework/Admin/Views/explorer/Twig/filelist.twig
 app/Code/Framework/Admin/Views/code/Twig/edit.twig
 app/Code/Framework/Admin/Views/code/Twig/explorer.twig
@@ -2343,6 +2359,7 @@ app/Code/Framework/Admin/Views/apps/Twig/list.twig
 app/Code/Framework/Admin/Views/files/Twig/app.twig
 app/Code/Framework/Admin/Views/caching/Twig/status.twig
 app/Code/Framework/Admin/Images/file_explorer_icon.png
+app/Code/Framework/Admin/Images/tailwind.png
 app/Code/Framework/Admin/Images/monitor_icon.png
 app/Code/Framework/Admin/Images/placeholder-.png
 app/Code/Framework/Admin/Images/file_monitor_icon.png
@@ -2377,6 +2394,7 @@ app/Code/Framework/Admin/Controllers/test.xml
 app/Code/Framework/Admin/Controllers/system.xml
 app/Code/Framework/Admin/Controllers/menu.xml
 app/Code/Framework/Admin/Controllers/utilities.xml
+app/Code/Framework/Admin/Controllers/tailwind.xml
 app/Code/Framework/Admin/Controllers/secrets.xml
 app/Code/Framework/Admin/Controllers/flag.xml
 app/Code/Framework/Admin/Controllers/socket.xml
@@ -2398,6 +2416,7 @@ app/Code/Framework/Admin/Controllers/Cache/testController.php
 app/Code/Framework/Admin/Controllers/Cache/documentationController.php
 app/Code/Framework/Admin/Controllers/Cache/filesController.php
 app/Code/Framework/Admin/Controllers/Cache/passwordController.php
+app/Code/Framework/Admin/Controllers/Cache/tailwindController.php
 app/Code/Framework/Admin/Controllers/Cache/systemController.php
 app/Code/Framework/Admin/Controllers/Cache/codeController.php
 app/Code/Framework/Admin/Controllers/Cache/usersController.php
@@ -2438,6 +2457,7 @@ app/Code/Framework/Admin/Models/Documentation.php
 app/Code/Framework/Admin/Models/Code.php
 app/Code/Framework/Admin/Models/Cadence.php
 app/Code/Framework/Admin/Models/Menus.php
+app/Code/Framework/Admin/Models/Tailwind.php
 app/Code/Framework/Admin/Models/Sockets.php
 app/Code/Framework/Admin/Models/System.php
 app/Code/Framework/Admin/Models/Utility.php
@@ -2463,3 +2483,4 @@ app/Exceptions/MalformedXMLException.php
 app/Exceptions/ControllerParameterException.php
 app/Exceptions/WhitelistException.php
 app/Exceptions/InactiveWebServiceException.php
+app/install/config.xml app/Code/Framework/Humble/etc/config.xml

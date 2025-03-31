@@ -6,32 +6,31 @@ AllowOverride none
 Require all granted
 RewriteEngine on
 RewriteBase /
-RewriteRule ^index.html?(.*) /monitor/dashboard/home?message=$1 "[B= ?,L,NC,QSA]"
+RewriteRule ^index.html?(.*) /&&NAMESPACE&&/&&CONTROLLER&&/&&PAGE&&?message=$1 "[B= ?,L,NC,QSA]"
 RewriteRule ^app/ - [L,NC]
 RewriteRule ^lib/ - [L,NC]
 RewriteRule ^images/ - [L,NC]
 RewriteRule ^web/ - [L,NC]
 RewriteRule ^docs/ - [L,NC]
 RewriteRule ^pages/ - [L,NC]
-RewriteRule ^admin$ /admin/home/page [NC,QSA,L]
-RewriteRule ^admin/$ /admin/home/page [NC,QSA,L]
 RewriteRule ^install$ /install.php [NC,QSA,L]
 RewriteRule ^install/$ /install.php [NC,QSA,L]
-RewriteRule ^home/ /monitor/dashboard/home [QSA,L]
 RewriteRule ^distro/(.*)? /distro.php?action=$1 [QSA,L]
-RewriteRule ^js/([^/\.]+)? /loader.php?type=js&package=$1 [QSA,L]
-RewriteRule ^mjs/([^/\.]+)/(.*)? /loader.php?type=mjs&namespace=$1&file=$2 [QSA,L]
-RewriteRule ^css/([^/\.]+)? /loader.php?type=css&package=$1 [QSA,L]
-RewriteRule ^edits/([^/\.]+)/([^/\.]+)? /loader.php?type=edits&n=$1&f=$2 [QSA,L]
+RewriteRule ^js/([^/\.]+)? /app/loader.php?type=js&package=$1 [QSA,L]
+RewriteRule ^mjs/([^/\.]+)/(.*)? /app/loader.php?type=mjs&namespace=$1&file=$2 [QSA,L]
+RewriteRule ^css/([^/\.]+)? /app/loader.php?type=css&package=$1 [QSA,L]
+RewriteRule ^edits/([^/\.]+)/([^/\.]+)? /app/loader.php?type=edits&n=$1&f=$2 [QSA,L]
 RewriteRule ^ckeditor/(.*)? /app/Code/Framework/Paradigm/web/js/ckeditor/$1 [QSA,L]
 RewriteRule ^ace/(.*)? /app/Code/Framework/Paradigm/web/js/ace/$1 [QSA,L]
-RewriteRule ^api/([^/\.]+)/([^/\.]+)/(.*)?$ /api.php?humble_api_namespace=$1&humble_api_entity=$2&humble_api_method=$3 [QSA,L]
-RewriteRule ^api/([^/\.]+)/([^/\.]+)?$ /api.php?humble_api_namespace=$1&humble_api_entity=$2 [QSA,L]
-RewriteRule ^hook/([^/\.]+)/([^/\.]+)? /hapi.php?n=$1&hook=$2 [QSA,L]
-RewriteRule ^mapi/([^/\.]+)/([^/\.]+)/(.*)?$ /mapi.php?n=$1&t=$2&m=$3 [QSA,L]
-RewriteRule ^mapi/([^/\.]+)/([^/\.]+)?$ /mapi.php?n=$1&t=$2 [QSA,L]
-RewriteRule ^esb/(.*)? /iapi.php?uri=$1 [QSA,L]
+RewriteRule ^api/([^/\.]+)/([^/\.]+)/(.*)?$ /app/api.php?humble_api_namespace=$1&humble_api_entity=$2&humble_api_method=$3 [QSA,L]
+RewriteRule ^api/([^/\.]+)/([^/\.]+)?$ /app/api.php?humble_api_namespace=$1&humble_api_entity=$2 [QSA,L]
+RewriteRule ^hook/([^/\.]+)/([^/\.]+)? /app/hapi.php?n=$1&hook=$2 [QSA,L]
+RewriteRule ^mapi/([^/\.]+)/([^/\.]+)/(.*)?$ /app/mapi.php?n=$1&t=$2&m=$3 [QSA,L]
+RewriteRule ^mapi/([^/\.]+)/([^/\.]+)?$ /app/mapi.php?n=$1&t=$2 [QSA,L]
+RewriteRule ^esb/(.*)? /app/iapi.php?uri=$1 [QSA,L]
 RewriteRule ^([^/\.]+)/([^/\.]+)/(.*)?$ /index.php?humble_framework_namespace=$1&humble_framework_controller=$2&humble_framework_action=$3 [QSA,L]
-RedirectMatch 404 app/Code/Main/Monitor/etc/public_routes.json
+RewriteRule ^([^/\.]+)$ /app/aliases.php?token=$1 [QSA,L]
+RewriteRule ^([^/\.]+)/$ /app/aliases.php?token=$1 [QSA,L]
+RedirectMatch 404 app/Code/&&PACKAGE&&/&&MODULE&&/etc/public_routes.json
 RedirectMatch 404 \.(xml|yaml|yml|project)$
-ErrorDocument 404 /monitor/dashboard/404
+ErrorDocument 404 /&&NAMESPACE&&/&&CONTROLLER&&/404
